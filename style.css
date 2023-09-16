@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'estedad';
-    src: url('./assets/font/Estedad-Regular.eot');
-    src: url('./assets/font/Estedad-Regular.ttf');
-    src: url('./assets/font/Estedad-Regular.woff2');
-    src: url('./assets/font/Estedad-Regular.woff');
+    src: url('assets/font/Estedad-Regular.eot');
+    src: url('assets/font/Estedad-Regular.ttf');
+    src: url('assets/font/Estedad-Regular.woff2');
+    src: url('assets/font/Estedad-Regular.woff');
 }
 
 body , * {
