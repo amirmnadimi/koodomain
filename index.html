@@ -1,0 +1,509 @@
+
+<!DOCTYPE HTML>
+<html>
+<head><meta charset="utf-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.v="1.2.3",this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",t=>{this.persisted=t.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(t){if(document.hidden){t._triggerListener();return}this.triggerEvents.forEach(e=>window.addEventListener(e,t.userEventHandler,{passive:!0})),window.addEventListener("touchstart",t.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",t.touchStartHandler),document.addEventListener("visibilitychange",t.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(t){"HTML"!==t.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),t.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(t){t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this.interceptedClicks.push(t),t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(t=>{t.target.dispatchEvent(new MouseEvent("click",{view:t.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(t=>{this._isClickPending?this._pendingClickFinished=t:t()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(t,e,r){t.hasAttribute&&t.hasAttribute(e)&&(event.target.setAttribute(r,event.target.getAttribute(e)),event.target.removeAttribute(e))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let t=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{if(e.hasAttribute("src")){let r=new URL(e.src).origin;r!==location.origin&&t.push({src:r,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this._batchInjectResourceHints(t,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(t){console.error(t)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _transformScript(t){return new Promise((await this._littleBreath(),navigator.userAgent.indexOf("Firefox/")>0||""===navigator.vendor)?e=>{let r=document.createElement("script");[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),r.setAttribute(e,t.nodeValue))}),t.text&&(r.text=t.text),r.hasAttribute("src")?(r.addEventListener("load",e),r.addEventListener("error",e)):(r.text=t.text,e());try{t.parentNode.replaceChild(r,t)}catch(i){e()}}:async e=>{function r(){t.setAttribute("data-rocket-status","failed"),e()}try{let i=t.getAttribute("data-rocket-type"),n=t.getAttribute("data-rocket-src");t.text,i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",function r(){t.setAttribute("data-rocket-status","executed"),e()}),t.addEventListener("error",r),n?(t.removeAttribute("data-rocket-src"),t.src=n):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}catch(s){r()}})}async _loadScriptsFromList(t){let e=t.shift();return e&&e.isConnected?(await this._transformScript(e),this._loadScriptsFromList(t)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(t,e){var r=document.createDocumentFragment();t.forEach(t=>{let i=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(i){let n=document.createElement("link");n.href=i,n.rel=e,"preconnect"!==e&&(n.as="script"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),r.appendChild(n),this.trash.push(n)}}),document.head.appendChild(r)}_delayEventListeners(t){let e={};function r(t,r){!function t(r){!e[r]&&(e[r]={originalFunctions:{add:r.addEventListener,remove:r.removeEventListener},eventsToRewrite:[]},r.addEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.add.apply(r,arguments)},r.removeEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.remove.apply(r,arguments)});function i(t){return e[r].eventsToRewrite.indexOf(t)>=0?"rocket-"+t:t}}(t),e[t].eventsToRewrite.push(r)}function i(t,e){let r=t[e];Object.defineProperty(t,e,{get:()=>r||function(){},set(i){t["rocket"+e]=r=i}})}r(document,"DOMContentLoaded"),r(window,"DOMContentLoaded"),r(window,"load"),r(window,"pageshow"),r(document,"readystatechange"),i(document,"onreadystatechange"),i(window,"onload"),i(window,"onpageshow")}_delayJQueryReady(t){let e;function r(r){if(r&&r.fn&&!t.allJQueries.includes(r)){r.fn.ready=r.fn.init.prototype.ready=function(e){return t.domReadyFired?e.bind(document)(r):document.addEventListener("rocket-DOMContentLoaded",()=>e.bind(document)(r)),r([])};let i=r.fn.on;r.fn.on=r.fn.init.prototype.on=function(){if(this[0]===window){function t(t){return t.split(" ").map(t=>"load"===t||0===t.indexOf("load.")?"rocket-jquery-load":t).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=t(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(e=>{let r=arguments[0][e];delete arguments[0][e],arguments[0][t(e)]=r})}return i.apply(this,arguments),this},t.allJQueries.push(r)}e=r}r(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){r(t)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this._littleBreath();let t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let t=new Map;document.write=document.writeln=function(e){let r=document.currentScript;r||console.error("WPRocket unable to document.write this: "+e);let i=document.createRange(),n=r.parentElement,s=t.get(r);void 0===s&&(s=r.nextSibling,t.set(r,s));let a=document.createDocumentFragment();i.setStart(a,0),a.appendChild(i.createContextualFragment(e)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}_emptyTrash(){this.trash.forEach(t=>t.remove())}static run(){let t=new RocketLazyLoadScripts;t._addUserInteractionListener(t)}}RocketLazyLoadScripts.run();</script>
+	<meta http-equiv="content-type" content="text/html" />
+    
+	<meta name="author" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link data-minify="1" rel="stylesheet" href="https://wp-parsi.com/wp-content/cache/min/1/wp-content/themes/wp/assets/css/prism.css?ver=1694294849">
+	<link rel="stylesheet" href="style.css">
+    <link data-minify="1" rel="stylesheet" href="https://wp-parsi.com/wp-content/cache/min/1/wp-content/themes/wp/assets/css/custom.min.css?ver=1694294849">
+    <title>جستجو هوشمند و آگاهانه دامنه | کو دامین</title>
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="مرجع کو دامین در ایران" />
+	<link rel="canonical" href="https://wp-parsi.com/" />
+	<meta property="og:locale" content="fa_IR" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="کو دامین" />
+	<meta property="og:description" content="مرجع کو دامین در ایران" />
+	<meta property="og:url" content="https://wp-parsi.com/" />
+	<meta property="og:site_name" content="کو دامین" />
+	<meta property="article:publisher" content="https://www.facebook.com/WP.Parsi" />
+	<meta property="article:modified_time" content="2019-10-25T21:10:28+00:00" />
+	<meta property="og:image" content="https://wp-parsi.com/wp-content/uploads/2015/03/banner1.jpg" />
+	<meta property="og:image:width" content="614" />
+	<meta property="og:image:height" content="327" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@wpparsi" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://wp-parsi.com/","url":"https://wp-parsi.com/","name":"کو دامین","isPartOf":{"@id":"https://wp-parsi.com/#website"},"about":{"@id":"https://wp-parsi.com/#organization"},"datePublished":"2019-10-25T21:04:47+00:00","dateModified":"2019-10-25T21:10:28+00:00","description":"مرجع کو دامین در ایران","breadcrumb":{"@id":"https://wp-parsi.com/#breadcrumb"},"inLanguage":"fa-IR","potentialAction":[{"@type":"ReadAction","target":["https://wp-parsi.com/"]}]},{"@type":"BreadcrumbList","@id":"https://wp-parsi.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"خانه"}]},{"@type":"WebSite","@id":"https://wp-parsi.com/#website","url":"https://wp-parsi.com/","name":"کو دامین","description":"","publisher":{"@id":"https://wp-parsi.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://wp-parsi.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"fa-IR"},{"@type":"Organization","@id":"https://wp-parsi.com/#organization","name":"WordPress Parsi","url":"https://wp-parsi.com/","logo":{"@type":"ImageObject","inLanguage":"fa-IR","@id":"https://wp-parsi.com/#/schema/logo/image/","url":"https://wp-parsi.com/wp-content/uploads/2015/03/logo.png","contentUrl":"https://wp-parsi.com/wp-content/uploads/2015/03/logo.png","width":450,"height":450,"caption":"WordPress Parsi"},"image":{"@id":"https://wp-parsi.com/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/WP.Parsi","https://twitter.com/wpparsi"]}]}</script>
+	<meta name="google-site-verification" content="YhXIt2f6QxxT2Z0jbdx81-4-Aqy140RiJoKMN5TBRrg" />
+	<!-- / Yoast SEO plugin. -->
+
+
+
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-color-picker-rtl-css' href='https://wp-parsi.com/wp-admin/css/color-picker-rtl.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-rtl-css' href='https://wp-parsi.com/wp-includes/css/dist/block-library/style-rtl.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-content/themes/wp/assets/js/jquery-3.2.1.min.js?ver=6.3.1' id='jquery-js' defer></script>
+<link rel="https://api.w.org/" href="https://wp-parsi.com/wp-json/" /><link rel="alternate" type="application/json" href="https://wp-parsi.com/wp-json/wp/v2/pages/694" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://wp-parsi.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='https://wp-parsi.com/' />
+<link rel="alternate" type="application/json+oembed" href="https://wp-parsi.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwp-parsi.com%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://wp-parsi.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwp-parsi.com%2F&#038;format=xml" />
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	<script type="rocketlazyloadscript" async data-rocket-src="https://www.googletagmanager.com/gtag/js?id=UA-98901236-3"></script>
+	<script type="rocketlazyloadscript">
+	    window.dataLayer = window.dataLayer || [];
+	    function gtag(){dataLayer.push(arguments);}
+	    gtag('js', new Date());
+	    gtag('config', 'UA-98901236-3');
+	</script>
+
+</head>
+
+<body class="rtl home page-template page-template-tpl-home page-template-tpl-home-php page page-id-694">
+    <header>
+        <div class="top-navbar container">
+			<nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+	           <div id="logo" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right">
+                    <a href="https://wp-parsi.com" class="logo">
+                                            <img width="42" height="41" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2042%2041'%3E%3C/svg%3E" alt="کو دامین" data-lazy-src="assets/img/logo.png"><noscript><img width="42" height="41" src="https://wp-parsi.com/wp-content/themes/wp/assets/images/logo.png" alt="کو دامین"></noscript>
+                                        </a>
+                </div>
+                <div class="navbar-header hidden-lg hidden-md hidden-sm col-xs-3 pull-left">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#pimary">
+                        <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M4 12H20M4 8H20M4 16H12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg>
+                    </button>
+                </div>
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12 collapse navbar-collapse pull-right" id="pimary">
+                   <ul id="menu-%d9%81%d9%87%d8%b1%d8%b3%d8%aa-%d8%a8%d8%a7%d9%84%d8%a7" class="nav nav-pills"><li id="menu-item-464" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-464"><a href="#"> صفحه اصلی</a></li>
+<!--<li id="menu-item-461" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-461"><a>مقالات و آموزش‌ها</a>
+<ul class="sub-menu">
+	<li id="menu-item-467" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-467"><a href="https://wp-parsi.com/category/articles/%d8%a2%d9%85%d9%88%d8%b2%d8%b4-%d8%a8%d8%b1%d8%a7%db%8c-%d9%85%d8%a8%d8%aa%d8%af%db%8c%d8%a7%d9%86/">آموزش برای مبتدیان</a></li>
+	<li id="menu-item-468" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-468"><a href="https://wp-parsi.com/category/articles/%d8%a7%d9%81%d8%b2%d9%88%d9%86%d9%87-%d9%86%d9%88%db%8c%d8%b3%db%8c/">افزونه نویسی</a></li>
+	<li id="menu-item-471" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-471"><a href="https://wp-parsi.com/category/articles/%d8%b7%d8%b1%d8%a7%d8%ad%db%8c-%d9%be%d9%88%d8%b3%d8%aa%d9%87/">طراحی پوسته</a></li>
+	<li id="menu-item-501" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-501"><a href="https://wp-parsi.com/category/articles/%d8%af%db%8c%d8%aa%d8%a7%d8%a8%db%8c%d8%b3-%d9%88-%da%a9%d9%88%d8%a6%d8%b1%db%8c/">دیتابیس و کوئری</a></li>
+	<li id="menu-item-472" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-472"><a href="https://wp-parsi.com/category/articles/%d9%81%d8%b1%d9%88%d8%b4%da%af%d8%a7%d9%87-%d8%b3%d8%a7%d8%b2%d9%87%d8%a7/">فروشگاه‌سازها</a></li>
+	<li id="menu-item-470" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-470"><a href="https://wp-parsi.com/category/articles/%d8%b3%d8%a6%d9%88-%d9%88%d8%b1%d8%af%d9%be%d8%b1%d8%b3/">سئو وردپرس</a></li>
+	<li id="menu-item-469" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-469"><a href="https://wp-parsi.com/category/articles/%d8%a7%d9%85%d9%86%db%8c%d8%aa-%d9%88%d8%b1%d8%af%d9%be%d8%b1%d8%b3/">امنیت وردپرس</a></li>
+	<li id="menu-item-473" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-473"><a href="https://wp-parsi.com/category/articles/%d9%85%d8%b9%d8%b1%d9%81%db%8c-%d8%a7%d9%81%d8%b2%d9%88%d9%86%d9%87/">معرفی افزونه</a></li>
+</ul>
+</li>-->
+<li id="menu-item-462" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-462"><a href="#">مستندات</a></li>
+<!--<li id="menu-item-463" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-463"><a>خبرها و رویدادها</a>
+<ul class="sub-menu">
+	<li id="menu-item-465" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-465"><a href="https://wp-parsi.com/category/press/news/">خبرها</a></li>
+	<li id="menu-item-466" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-466"><a href="https://wp-parsi.com/category/press/events/">رویدادها</a></li>
+</ul>-->
+</li>
+<li id="menu-item-460" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-460"><a href="#">درباره ما</a></li>
+</ul>                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 searchsection">
+                    <form role="search" method="get" class="search-form" action="">
+                        <input class="search form-control" placeholder="جستجو در تمام دامنه ها" value="" name="s" required> 
+                        <span class="searchit" onclick="jQuery('.search-form').submit();"></span>
+                    </form>
+                </div>
+            
+			</nav>
+			
+		</div>
+    </header>
+<div class="container">
+	<div class="row" style="">
+		
+		<div class="shape"></div>
+		<div class="fix">
+			<div class="col-lg-6 wp-parsidate">
+				<div class="inwp">
+					<strong><span> جستجو دامنه  <span style="color: #0153ff;">کو دامین</span></span></strong>
+					<p>پیشنهاد هوشمند و آگاهانه</p>
+
+					<!--<a href="https://wordpress.org/plugins/wp-parsidate/" class="btn btn-success btn-md btn-block down" target="_blank">
+						
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							 viewBox="0 0 330 330" style="width: 18px;height: 18px;" xml:space="preserve">
+						<g>
+							<path fill="#34a234" d="M154.389,255.602c0.351,0.351,0.719,0.683,1.103,0.998c0.169,0.138,0.347,0.258,0.52,0.388
+								c0.218,0.164,0.432,0.333,0.659,0.484c0.212,0.142,0.432,0.265,0.649,0.395c0.202,0.121,0.4,0.248,0.608,0.359
+								c0.223,0.12,0.453,0.221,0.681,0.328c0.215,0.102,0.427,0.21,0.648,0.301c0.223,0.092,0.45,0.167,0.676,0.247
+								c0.236,0.085,0.468,0.175,0.709,0.248c0.226,0.068,0.456,0.119,0.684,0.176c0.246,0.062,0.489,0.131,0.739,0.181
+								c0.263,0.052,0.529,0.083,0.794,0.121c0.219,0.031,0.435,0.073,0.658,0.095c0.492,0.048,0.986,0.075,1.48,0.075
+								c0.494,0,0.988-0.026,1.479-0.075c0.226-0.022,0.444-0.064,0.667-0.096c0.262-0.037,0.524-0.068,0.784-0.12
+								c0.255-0.05,0.504-0.121,0.754-0.184c0.223-0.057,0.448-0.105,0.669-0.172c0.246-0.075,0.483-0.167,0.724-0.253
+								c0.221-0.08,0.444-0.152,0.662-0.242c0.225-0.093,0.44-0.202,0.659-0.306c0.225-0.106,0.452-0.206,0.672-0.324
+								c0.21-0.112,0.408-0.239,0.611-0.361c0.217-0.13,0.437-0.252,0.648-0.394c0.222-0.148,0.431-0.314,0.644-0.473
+								c0.179-0.134,0.362-0.258,0.536-0.4c0.365-0.3,0.714-0.617,1.049-0.949c0.016-0.016,0.034-0.028,0.049-0.044l70.002-69.998
+								c5.858-5.858,5.858-15.355,0-21.213c-5.857-5.857-15.355-5.858-21.213-0.001l-44.396,44.393V25c0-8.284-6.716-15-15-15
+								c-8.284,0-15,6.716-15,15v183.785l-44.392-44.391c-5.857-5.858-15.355-5.858-21.213,0c-5.858,5.858-5.858,15.355,0,21.213
+								L154.389,255.602z"/>
+							<path fill="#34a234" d="M315,160c-8.284,0-15,6.716-15,15v115H30V175c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v130
+								c0,8.284,6.716,15,15,15h300c8.284,0,15-6.716,15-15V175C330,166.716,323.284,160,315,160z"/>
+						</g>
+						</svg>-->
+
+					</a>
+					<a href="https://wp-parsi.com/support/topic/15855-%D8%AA%D9%88%D8%B6%DB%8C%D8%AD%D8%A7%D8%AA-%D9%88-%D9%85%D8%B3%D8%AA%D9%86%D8%AF%D8%A7%D8%AA-%D8%A8%D8%B3%D8%AA%D9%87-%D9%BE%D8%A7%D8%B1%D8%B3%DB%8C-%D8%B3%D8%A7%D8%B2/" class="btn btn-success btn-md btn-block more">جستجوی هوشمند دامنه</a>
+				</div>
+
+			</div>
+		</div>
+
+
+		<!--<div class="col-lg-12">
+				    <div id="events" class="col-lg-12">
+				<section class="events">
+					<div class="">
+		            <div class="title">
+		                        		                        <h2>آخرین آموزش‌های وردپرس <small><a href="https://wp-parsi.com/category/articles/">مشاهده همه</a></small></h2>
+		                        <p></p>
+		                </div>
+		                <div class="fix">
+		                 		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+				                              <div class="img_box">
+				                                    <a href="https://wp-parsi.com/parsidate-version-4/">
+				                                        <img width="300" height="180" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3C/svg%3E" class="attachment-index size-index wp-post-image" alt="" decoding="async" data-lazy-src="https://wp-parsi.com/wp-content/uploads/2017/01/wp-date-update-300x180.jpg" /><noscript><img width="300" height="180" src="https://wp-parsi.com/wp-content/uploads/2017/01/wp-date-update-300x180.jpg" class="attachment-index size-index wp-post-image" alt="" decoding="async" /></noscript>				                                    </a>
+				                              </div>
+			                                <h3><a href="https://wp-parsi.com/parsidate-version-4/">نگارش ۴ افزونه پارسی دیت منتشر شد</a></h3>
+			                                <div class="excerpt">افزونه شمسی ساز تاریخ کو دامین‌دیت که در حال حاضر پر نصب‌ترین افزونه شمسی‌ساز در بین کاربران فارسی زبان است به‌روزرسانی شد. این به‌روزرسانی با...</div>
+		                                    <div class="avatar-box clearfix">
+									            <img alt='' src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2027%2027'%3E%3C/svg%3E" data-lazy-srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async' data-lazy-src="https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g"/><noscript><img alt='' src='https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async'/></noscript>									            <div>
+									                <span class="uname">سعید فرد</span>
+									                <span class="time">۲۶ آبان ۱۴۰۰</span>
+									            </div>
+												<span class="cat-name">
+																			                            <a href="https://wp-parsi.com/category/articles/">مقالات و آموزش‌ها</a>
+												</span>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+				                              <div class="img_box">
+				                                    <a href="https://wp-parsi.com/%d8%a2%d9%85%d9%88%d8%b2%d8%b4-%d9%be%d9%84%d8%a7%da%af%db%8c%d9%86-%d9%86%d9%88%db%8c%d8%b3%db%8c-%d8%af%d8%b1-%d9%88%d8%b1%d8%af%d9%be%d8%b1%d8%b3-%d8%a7%d8%b2-%d8%b5%d9%81%d8%b1-%d8%aa%d8%a7-%d8%b5/">
+				                                        <img width="300" height="180" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3C/svg%3E" class="attachment-index size-index wp-post-image" alt="" decoding="async" data-lazy-src="https://wp-parsi.com/wp-content/uploads/2018/01/WordPress-Plugins-300x180.jpg" /><noscript><img width="300" height="180" src="https://wp-parsi.com/wp-content/uploads/2018/01/WordPress-Plugins-300x180.jpg" class="attachment-index size-index wp-post-image" alt="" decoding="async" /></noscript>				                                    </a>
+				                              </div>
+			                                <h3><a href="https://wp-parsi.com/%d8%a2%d9%85%d9%88%d8%b2%d8%b4-%d9%be%d9%84%d8%a7%da%af%db%8c%d9%86-%d9%86%d9%88%db%8c%d8%b3%db%8c-%d8%af%d8%b1-%d9%88%d8%b1%d8%af%d9%be%d8%b1%d8%b3-%d8%a7%d8%b2-%d8%b5%d9%81%d8%b1-%d8%aa%d8%a7-%d8%b5/">آموزش پلاگین نویسی در وردپرس از صفر تا صد &#8211; قسمت دوم</a></h3>
+			                                <div class="excerpt">بخش دوم ایجاد صفحه در بخش مدیریت: برای افزودن صفحه به منوی ادمین وردپرس از هوک admin_menu استفاده میکنیم.هر منو دارای یک منوی اصلی وتعدادی زیر منو میباشد. برای...</div>
+		                                    <div class="avatar-box clearfix">
+									            <img alt='' src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2027%2027'%3E%3C/svg%3E" data-lazy-srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async' data-lazy-src="https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g"/><noscript><img alt='' src='https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async'/></noscript>									            <div>
+									                <span class="uname">مبین قاسمپور</span>
+									                <span class="time">۲۸ مرداد ۱۳۹۷</span>
+									            </div>
+												<span class="cat-name">
+																			                            <a href="https://wp-parsi.com/category/articles/%d8%a7%d9%81%d8%b2%d9%88%d9%86%d9%87-%d9%86%d9%88%db%8c%d8%b3%db%8c/">افزونه نویسی</a>
+												</span>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+				                              <div class="img_box">
+				                                    <a href="https://wp-parsi.com/deploy-wordpress-with-bedrock/">
+				                                        <img width="300" height="180" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3C/svg%3E" class="attachment-index size-index wp-post-image" alt="" decoding="async" data-lazy-src="https://wp-parsi.com/wp-content/uploads/2018/05/bedrock-og-300x180.png" /><noscript><img width="300" height="180" src="https://wp-parsi.com/wp-content/uploads/2018/05/bedrock-og-300x180.png" class="attachment-index size-index wp-post-image" alt="" decoding="async" /></noscript>				                                    </a>
+				                              </div>
+			                                <h3><a href="https://wp-parsi.com/deploy-wordpress-with-bedrock/">لذت Deploy وردپرس با Bedrock</a></h3>
+			                                <div class="excerpt">Bedrock یکی از بهترین محصولات تیم Roots هست، با استفاده از این پلتفورم میتونید به راحتی یه دستی به ساختار ساده وردپرس بکشید و اون رو از حالت سنتی به یک ساختار...</div>
+		                                    <div class="avatar-box clearfix">
+									            <img alt='' src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2027%2027'%3E%3C/svg%3E" data-lazy-srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async' data-lazy-src="https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g"/><noscript><img alt='' src='https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async'/></noscript>									            <div>
+									                <span class="uname">مصطفی صوفی</span>
+									                <span class="time">۱۸ اردیبهشت ۱۳۹۷</span>
+									            </div>
+												<span class="cat-name">
+																			                            <a href="https://wp-parsi.com/category/articles/">مقالات و آموزش‌ها</a>
+												</span>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+				                              <div class="img_box">
+				                                    <a href="https://wp-parsi.com/%d8%a7%d9%85%d9%88%d8%b2%d8%b4-%d9%be%d9%84%d8%a7%da%af%db%8c%d9%86-%d9%86%d9%88%db%8c%d8%b3%db%8c-%d9%88%d8%b1%d8%af%d9%be%d8%b1%d8%b3/">
+				                                        <img width="300" height="180" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3C/svg%3E" class="attachment-index size-index wp-post-image" alt="" decoding="async" data-lazy-src="https://wp-parsi.com/wp-content/uploads/2018/01/WordPress-Plugins-300x180.jpg" /><noscript><img width="300" height="180" src="https://wp-parsi.com/wp-content/uploads/2018/01/WordPress-Plugins-300x180.jpg" class="attachment-index size-index wp-post-image" alt="" decoding="async" /></noscript>				                                    </a>
+				                              </div>
+			                                <h3><a href="https://wp-parsi.com/%d8%a7%d9%85%d9%88%d8%b2%d8%b4-%d9%be%d9%84%d8%a7%da%af%db%8c%d9%86-%d9%86%d9%88%db%8c%d8%b3%db%8c-%d9%88%d8%b1%d8%af%d9%be%d8%b1%d8%b3/">آموزش پلاگین نویسی در وردپرس از صفر تا صد &#8211; قسمت اول</a></h3>
+			                                <div class="excerpt">پلاگین چیست؟ قطعه کدهای کوچک یا بزرگی میباشد که در برنامه اصلی نصب میشوند و قابلیت یا قابلیتهایی را به آن اضافه میکنند. از مهمترین عوامل معروفیت و کاربرد...</div>
+		                                    <div class="avatar-box clearfix">
+									            <img alt='' src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2027%2027'%3E%3C/svg%3E" data-lazy-srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async' data-lazy-src="https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g"/><noscript><img alt='' src='https://secure.gravatar.com/avatar/?s=27&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=54&#038;d=mm&#038;r=g 2x' class='avatar avatar-27 photo avatar-default' height='27' width='27' decoding='async'/></noscript>									            <div>
+									                <span class="uname">مبین قاسمپور</span>
+									                <span class="time">۱۵ بهمن ۱۳۹۶</span>
+									            </div>
+												<span class="cat-name">
+																			                            <a href="https://wp-parsi.com/category/articles/%d8%a7%d9%81%d8%b2%d9%88%d9%86%d9%87-%d9%86%d9%88%db%8c%d8%b3%db%8c/">افزونه نویسی</a>
+												</span>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    
+		               
+		                </div>
+
+					</div>
+				</section>
+		    </div>-->
+		
+			
+			
+
+			<div class="container col-lg-12 stats-section">
+
+
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<strong> پیشنهاد فوق العاده <small><a href="https://wpmeetup.ir/">کودامین</a></small></strong>
+					<p>
+						با توفان فکری فوق سریع داخلی، مشتریان شما فکر می کنند که این کار جادویی است. حساب‌های بیشتری را ببندید و به مشتریان خود کمک کنید تا نام مناسب برای برنامه، وب‌سایت یا کسب‌وکار جدید خود پیدا کنند.
+					</p>
+					<!--<span style="d-block">۱۱ میتاپ برگزار شده</span>
+					<span style="d-block">۲,۱۶۷ کل کاربران</span>-->
+
+				</div>		
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<strong> ارائه API <small><a href="http://wp-planet.ir/">کودامین</a></small></strong>
+					<p>
+						با دسترسی مستقیم و ممتاز به داده‌های رجیستری دامنه، Koodamin API فوراً در دسترس بودن دامنه‌ای را بررسی می‌کند - بدون هیچ نتیجه مثبت کاذب. در چند میلی ثانیه، مشتریان شما متوجه خواهند شد که آیا دامنه ای در دسترس است، با قیمت بالاتر، یا برای فروش در هر بازار بزرگ دیگری.
+					</p>
+					<!--<span style="d-block">۲۸ سایت ثبت شده</span>
+					<span style="d-block">۲,۲۴۲ کل مطالب</span>-->
+
+				</div>	
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<strong> جستجوی سریع <small><a href="https://wp-parsi.com/support/">کو دامین</a></small></strong>
+					<p>
+                        جستجوی فوری، هر ضربه کلید، هر جستجو را به یک مکالمه تبدیل می کند. کو دامین با پیشنهاد هوشمند زمینه آگاه، دامنه‌های سطح بالای مرتبط را نشان می‌دهد و به مشتریان شما کمک می‌کند تا نام کامل را پیدا کنند - حتی اگر .com گرفته شده باشد.
+					</p>
+					<!--<span style="d-block">۵۳,۹۶۳ کل موضوعات</span>
+					<span style="d-block">۲۹,۱۵۴ کل کاربران</span>-->
+				</div>	
+			</div>
+		
+
+
+
+				    <!--<div id="news" class="col-lg-12">
+				<section class="news">
+					<div class="">
+			            <div class="title">
+			                			                <h2>آخرین خبرهای وردپرس <small><a href="https://wp-parsi.com/category/press/">مشاهده همه</a></small></h2>
+			                <p></p>
+			            </div>
+		                <div class="fix">
+		                 		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+			                                <h3><a href="https://wp-parsi.com/wp20-tehran-meetup/">برگزاری میتاپ جشن تولد ۲۰ سالگی وردپرس در تهران</a></h3>
+			                                <div class="excerpt">در تاریخ ۶ خرداد امسال وردپرس ۲۰ ساله می‌شود. به همین مناسبت در تمامی دنیا رویدادهایی با هدف گرفتن جشن برای این روز برگزار می‌شود. لوکال منیجرها، توسعه‌دهنده‌ها و سایر دوستدارن دنیای متن باز و وردپرس با دورهم جمع شدن این روز رو در کل...</div>
+		                                    <div class="more clearfix text-left">
+												<a href="https://wp-parsi.com/wp20-tehran-meetup/">بیشتر بخوانید</a>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+			                                <h3><a href="https://wp-parsi.com/%d8%a8%d8%b1%da%af%d8%b2%d8%a7%d8%b1%db%8c-%d9%be%d9%86%d8%ac%d9%85%db%8c%d9%86-%d8%b1%d9%88%db%8c%d8%af%d8%a7%d8%af-%d8%a2%db%8c%d9%86%d8%af%d9%87-%d9%88%d8%a8-%d9%88-%d9%85%d9%88%d8%a8%d8%a7%db%8c/">برگزاری پنجمین رویداد آینده وب و موبایل</a></h3>
+			                                <div class="excerpt">روﯾﺪاد آﯾﻨﺪه وب و ﻣﻮﺑﺎﯾﻞ ﯾﮏ روﯾﺪاد ﺳﺎﻻﻧﻪ است که در روزهای ۸ و ۹ اسفند سال ۹۸، پنجمین دوره آن به مدت دو روز در مجموعه فرهنگی حجاب واقع در خیابان فاطمی تهران برگزار خواهد شد. این رویداد از دو بخش همایش و نمایشگاه تشکیل می‌شود...</div>
+		                                    <div class="more clearfix text-left">
+												<a href="https://wp-parsi.com/%d8%a8%d8%b1%da%af%d8%b2%d8%a7%d8%b1%db%8c-%d9%be%d9%86%d8%ac%d9%85%db%8c%d9%86-%d8%b1%d9%88%db%8c%d8%af%d8%a7%d8%af-%d8%a2%db%8c%d9%86%d8%af%d9%87-%d9%88%d8%a8-%d9%88-%d9%85%d9%88%d8%a8%d8%a7%db%8c/">بیشتر بخوانید</a>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+			                                <h3><a href="https://wp-parsi.com/freelanday/">برگزاری دومین همایش فریلند</a></h3>
+			                                <div class="excerpt">دومین همایش فریلند با رویکرد آموزش اصول فریلنسینگ، ۲۸ و ۲۹ شهریور در منطقه آزاد انزلی برگزار می‌شود. در این همایش افراد علاقه‌مند یاد می‌گیرند چطور کار کردن به شیوه فریلنسینگ به عنوان یک کار تمام وقت و حرفه‌ای را شروع کنند، مشتریان...</div>
+		                                    <div class="more clearfix text-left">
+												<a href="https://wp-parsi.com/freelanday/">بیشتر بخوانید</a>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    		                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pull-right loop_box">
+		                        <div class="loop box-shadow">
+		                              <div class="content">
+			                                <h3><a href="https://wp-parsi.com/coder-conf/">برگزاری چهارمین همایش Coder Conf</a></h3>
+			                                <div class="excerpt">کدرکانف هر سال در آخرین پنجشنبه مرداد با بورد‌های مختلفی برگزار می‌گردد،امسال نیز کدرکانف در همین تاریخ با حضور برنامه نویسان مطرح کشور در بورد تخصصی جاوااسکریپت برگزار خواهد شد، یک گردهمایی متفاوت با طعم Javascript. Coderconf هر سال نسبت به...</div>
+		                                    <div class="more clearfix text-left">
+												<a href="https://wp-parsi.com/coder-conf/">بیشتر بخوانید</a>
+									        </div>
+		                              </div>
+		                        </div>
+		                    </div>
+		                    
+		        
+		                </div>
+
+					</div>
+				</section>
+		    </div>-->
+		
+		</div><!--.col-12-->
+
+	</div><!--.corowntainer-->
+</div><!--.container-->
+
+	<footer class="clearfix">
+
+		<div class="footer">
+			<section class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-right">
+							<ul id="menu-%d9%81%d9%87%d8%b1%d8%b3%d8%aa-%d9%81%d9%88%d8%aa%d8%b1" class=""><li id="menu-item-476" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-476"><a href="https://wp-parsi.com/" aria-current="page">صفحه اصلی</a></li>
+<li id="menu-item-477" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-477"><a href="https://wp-parsi.com/support">مستندات</a></li>
+<li id="menu-item-475" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-475"><a href="https://wp-parsi.com/wp-parsidate-download/">گیت ابر</a></li>
+<li id="menu-item-474" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-474"><a href="https://wp-parsi.com/about/">درباره ما</a></li>
+<li id="menu-item-780" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-780"><a href="https://payarchap.com"> نت تو </a></li>
+</ul>							<p class="copyright">&copy; تمامی حقوق برای کو دامین محفوظ است.</p>
+</ul>							<p class="copyright">ساخته شده با ❤︎ در ایران</p>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left social-footer">
+							
+							<!--<a href="https://www.meetup.com/Iran-WordPress-Meetup/" target="_blank">
+								<svg width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 9.5 1 A 0.5 0.5 0 0 0 9.5 2 A 0.5 0.5 0 0 0 9.5 1 z M 18.5 2 A 1.5 1.5 0 0 0 18.5 5 A 1.5 1.5 0 0 0 18.5 2 z M 14 5 C 11.383 5 9.16375 6.678625 8.34375 9.015625 C 5.93275 9.099625 4 11.068 4 13.5 C 4 14.207 4.17775 14.867891 4.46875 15.462891 C 3.56175 16.367891 3 17.618 3 19 C 3 21.422 4.7227656 23.441391 7.0097656 23.900391 C 7.0087656 23.934391 7 23.966 7 24 C 7 26.761 9.239 29 12 29 C 13.213 29 14.309781 28.551031 15.175781 27.832031 C 15.899781 28.554031 16.898 29 18 29 C 19.868 29 21.424281 27.713422 21.863281 25.982422 C 24.730281 25.793422 27 23.415 27 20.5 C 27 19.348 26.645062 18.279484 26.039062 17.396484 C 26.631062 16.769484 27 15.93 27 15 C 27 13.599 26.171422 12.399844 24.982422 11.839844 C 24.989422 11.726844 25 11.615 25 11.5 C 25 8.462 22.538 6 19.5 6 C 18.877 6 18.280656 6.1078281 17.722656 6.2988281 C 16.699656 5.4878281 15.407 5 14 5 z M 7 6 A 1 1 0 0 0 7 8 A 1 1 0 0 0 7 6 z M 27 9 A 1 1 0 0 0 27 11 A 1 1 0 0 0 27 9 z M 17.005859 9.9921875 C 17.152094 9.9790625 17.314656 9.9865781 17.503906 10.017578 C 18.014906 10.091578 18.311219 10.441547 18.699219 10.810547 C 19.013219 11.130547 19.240922 10.933125 19.419922 10.828125 C 19.696922 10.668125 19.913281 10.527875 20.738281 10.546875 C 21.600281 10.564875 22.585922 10.879422 22.794922 12.357422 C 23.022922 14.014422 20.140078 18.269234 20.330078 20.240234 C 20.465078 21.626234 22.794375 20.639203 22.984375 21.908203 C 23.232375 23.557203 20.085813 22.942797 19.382812 22.591797 C 18.255813 22.024797 17.566609 20.742609 17.849609 19.474609 C 18.083609 18.526609 20.158141 14.653219 20.244141 14.074219 C 20.318141 13.458219 19.999594 13.402344 19.808594 13.402344 C 19.543594 13.384344 19.352891 13.508484 19.087891 13.896484 C 18.859891 14.247484 16.271922 19.512219 16.044922 19.949219 C 15.323922 21.341219 13.457969 21.113125 13.667969 19.703125 C 13.722969 19.284125 15.379266 15.516922 15.447266 14.919922 C 15.502266 14.568922 15.430125 14.179281 15.078125 13.988281 C 14.727125 13.809281 14.302688 14.093734 14.179688 14.302734 C 14.000687 14.604734 11.678641 20.782281 11.431641 21.238281 C 10.994641 22.026281 10.550187 22.273547 9.8671875 22.310547 C 8.2661875 22.402547 7.0667031 21.046203 7.5957031 19.408203 C 7.8237031 18.669203 9.3681094 13.114125 10.162109 11.703125 C 10.692109 10.755125 12.15225 10.035656 13.15625 10.472656 C 13.68625 10.700656 14.425766 11.068828 14.634766 11.173828 C 15.127766 11.407828 15.655234 10.791281 15.865234 10.613281 C 16.276234 10.257781 16.567156 10.031562 17.005859 9.9921875 z M 30.5 13 A 0.5 0.5 0 0 0 30.5 14 A 0.5 0.5 0 0 0 30.5 13 z M 1.5 14 A 1.5 1.5 0 0 0 1.5 17 A 1.5 1.5 0 0 0 1.5 14 z M 29 16 A 1 1 0 0 0 29 18 A 1 1 0 0 0 29 16 z M 5.5 25 A 0.5 0.5 0 0 0 5.5 26 A 0.5 0.5 0 0 0 5.5 25 z M 23.5 27 A 1.5 1.5 0 0 0 23.5 30 A 1.5 1.5 0 0 0 23.5 27 z M 15 29 A 1 1 0 0 0 15 31 A 1 1 0 0 0 15 29 z"/></svg>
+							</a>
+							<a href="https://wp-parsi.com/feed/" target="_blank">
+								<svg version="1.1" x="0px" y="0px"
+									 viewBox="0 0 291.319 291.319" style="enable-background:new 0 0 291.319 291.319;" xml:space="preserve">
+								<g>
+									<path style="fill:#73777b;" d="M145.659,0c80.44,0,145.66,65.219,145.66,145.66c0,80.45-65.219,145.659-145.66,145.659
+										S0,226.109,0,145.66C0,65.219,65.21,0,145.659,0z"/>
+									<path style="fill:#21292f;" d="M109.254,163.831c-10.06,0-18.226,8.157-18.226,18.226s8.157,18.226,18.226,18.226
+										s18.226-8.157,18.226-18.226S119.322,163.831,109.254,163.831z M103.873,118.367c-7.074,0-12.8,5.726-12.8,12.8
+										c0,7.064,5.726,12.8,12.8,12.8c23.997,0,43.525,19.527,43.525,43.525c0,7.064,5.726,12.8,12.809,12.8c7.055,0,12.8-5.735,12.8-12.8
+										C173.007,149.374,141.991,118.367,103.873,118.367z M104.119,72.839c-7.228,0-13.091,5.863-13.091,13.091
+										s5.863,13.091,13.091,13.091c48.623,0,88.188,39.556,88.188,88.179c0,7.228,5.854,13.091,13.091,13.091s13.091-5.872,13.091-13.091
+										C218.48,124.138,167.172,72.839,104.119,72.839z"/>
+								</g>
+								</svg>
+
+							</a>
+							<a href="https://facebook.com/WP.Parsi" target="_blank">
+								<svg version="1.1" x="0px" y="0px"
+									 viewBox="0 0 112.196 112.196" style="enable-background:new 0 0 112.196 112.196;" xml:space="preserve">
+								<g>
+									<circle style="fill:#73777b;" cx="56.098" cy="56.098" r="56.098"/>
+									<path style="fill:#21292f;" d="M70.201,58.294h-10.01v36.672H45.025V58.294h-7.213V45.406h7.213v-8.34
+										c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z"/>
+								</g>
+								</svg>
+
+							</a>-->
+
+							<a href="https://twitter.com/Koodamin" target="_blank">
+								<svg version="1.1" x="0px" y="0px"
+									 viewBox="0 0 112.197 112.197" style="enable-background:new 0 0 112.197 112.197;" xml:space="preserve">
+								<g>
+									<circle style="fill:#73777b;" cx="56.099" cy="56.098" r="56.098"/>
+									<g>
+										<path style="fill:#21292f;" d="M90.461,40.316c-2.404,1.066-4.99,1.787-7.702,2.109c2.769-1.659,4.894-4.284,5.897-7.417
+											c-2.591,1.537-5.462,2.652-8.515,3.253c-2.446-2.605-5.931-4.233-9.79-4.233c-7.404,0-13.409,6.005-13.409,13.409
+											c0,1.051,0.119,2.074,0.349,3.056c-11.144-0.559-21.025-5.897-27.639-14.012c-1.154,1.98-1.816,4.285-1.816,6.742
+											c0,4.651,2.369,8.757,5.965,11.161c-2.197-0.069-4.266-0.672-6.073-1.679c-0.001,0.057-0.001,0.114-0.001,0.17
+											c0,6.497,4.624,11.916,10.757,13.147c-1.124,0.308-2.311,0.471-3.532,0.471c-0.866,0-1.705-0.083-2.523-0.239
+											c1.706,5.326,6.657,9.203,12.526,9.312c-4.59,3.597-10.371,5.74-16.655,5.74c-1.08,0-2.15-0.063-3.197-0.188
+											c5.931,3.806,12.981,6.025,20.553,6.025c24.664,0,38.152-20.432,38.152-38.153c0-0.581-0.013-1.16-0.039-1.734
+											C86.391,45.366,88.664,43.005,90.461,40.316L90.461,40.316z"/>
+									</g>
+								</g>
+								</svg>
+
+							</a>
+							<a href="https://github.com/koodomain" target="_blank">
+								<svg width="32px" height="32px" viewBox="0 0 32 32">
+								  <path d="M16 0.396c-8.839 0-16 7.167-16 16 0 7.073 4.584 13.068 10.937 15.183 0.803 0.151 1.093-0.344 1.093-0.772 0-0.38-0.009-1.385-0.015-2.719-4.453 0.964-5.391-2.151-5.391-2.151-0.729-1.844-1.781-2.339-1.781-2.339-1.448-0.989 0.115-0.968 0.115-0.968 1.604 0.109 2.448 1.645 2.448 1.645 1.427 2.448 3.744 1.74 4.661 1.328 0.14-1.031 0.557-1.74 1.011-2.135-3.552-0.401-7.287-1.776-7.287-7.907 0-1.751 0.62-3.177 1.645-4.297-0.177-0.401-0.719-2.031 0.141-4.235 0 0 1.339-0.427 4.4 1.641 1.281-0.355 2.641-0.532 4-0.541 1.36 0.009 2.719 0.187 4 0.541 3.043-2.068 4.381-1.641 4.381-1.641 0.859 2.204 0.317 3.833 0.161 4.235 1.015 1.12 1.635 2.547 1.635 4.297 0 6.145-3.74 7.5-7.296 7.891 0.556 0.479 1.077 1.464 1.077 2.959 0 2.14-0.020 3.864-0.020 4.385 0 0.416 0.28 0.916 1.104 0.755 6.4-2.093 10.979-8.093 10.979-15.156 0-8.833-7.161-16-16-16z"/>
+								</svg>
+
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+    </footer>
+    
+    <script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2' id='jquery-ui-core-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.2' id='jquery-ui-mouse-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-includes/js/jquery/ui/draggable.min.js?ver=1.13.2' id='jquery-ui-draggable-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.2' id='jquery-ui-slider-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-content/cache/min/1/wp-includes/js/jquery/jquery.ui.touch-punch.js?ver=1694294849' id='jquery-touch-punch-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-admin/js/iris.min.js?ver=6.3.1' id='iris-js' defer></script>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after" data-rocket-type="text/javascript">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index.php\/)?(.*)wp-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/wp-parsi.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after" data-rocket-type="text/javascript">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type='text/javascript' id='post-ajax-handle-js-extra'>
+/* <![CDATA[ */
+var the_ajax_script = {"ajaxurl":"https:\/\/wp-parsi.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-content/cache/min/1/wp-content/themes/wp/assets/js/custom.js?ver=1694294849' id='post-ajax-handle-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://wp-parsi.com/wp-content/cache/min/1/wp-content/themes/wp/assets/js/functions.js?ver=1694294849' id='functions-js' defer></script>
+<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://wp-parsi.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script>	<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+        jQuery(document).ready(function(){
+            jQuery('#cat').change(function(){
+				var cat_id=jQuery(this).val();
+				if(cat_id > 0){
+					location.href = "https://wp-parsi.com/?cat="+cat_id;
+				}
+			});
+		});
+	});</script>
+<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+if ( jQuery("code").parents("pre").length != 1 ) { 
+	jQuery('code').wrap( "<pre></pre>");
+} 
+
+if( jQuery('pre').find('code').length != 1) {
+	jQuery('pre').wrapInner( "<code></code>");
+}
+	jQuery('code').addClass( "language-php");
+	jQuery('body').addClass( "line-numbers");
+
+
+});</script>
+		<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://wp-parsi.com/wp-content/cache/min/1/wp-content/themes/wp/assets/js/prism.js?ver=1694294849" defer></script>
+
+</body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1694888113 -->
